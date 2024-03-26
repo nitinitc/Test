@@ -1,0 +1,218 @@
+1.Types of commands and their examples.
+Answer: There are following types of commands in SQL:
+1. Data Definition Language (DDL: Create, Alter, Drop, Truncate)
+2. Data Manipulation Language (DML: Insert, Update, Delete, Select).
+3. Data Control Language (DCL:  Grant, Revoke)
+4.  Transaction control language ( Commit, Rollback)
+2.What is Normalization and denormalization?  
+Answer:  
+Normalization:
+Definition: Normalization is the process of organizing a database schema to reduce redundancy and dependency by breaking down large tables into smaller ones and defining relationships between them.
+Types: Normalization is usually categorized into several normal forms (e.g., First Normal Form (1NF), Second Normal Form (2NF), Third Normal Form (3NF), Boyce-Codd Normal Form (BCNF), Fourth Normal Form (4NF), Fifth Normal Form (5NF)), each with specific rules to eliminate different types of redundancy and dependency.
+Denormalization:
+Definition: Denormalization is the process of intentionally introducing redundancy into a database schema to improve query performance by reducing the need for joins and increasing data retrieval speed.
+Techniques: Denormalization techniques include duplicating data across tables, using precomputed aggregates, creating redundant indexes, and introducing redundant relationships.
+Trade-offs: While denormalization can improve read performance, it can also increase data redundancy, storage requirements, and the complexity of data maintenance. Additionally, it can introduce update anomalies if not managed properly.
+3.Explain 1NF, 2NF, 3NF.
+First Normal Form (1NF):
+
+Definition: A table is said to be in 1NF if it contains only atomic (indivisible) values, and there are no repeating groups or arrays of data within any single field.
+Requirements:
+Each column must contain atomic values (no multi-valued attributes).
+Each column must have a unique name.
+Each cell must hold a single value, not a set of values.
+Example: Suppose we have a table for storing customer orders. Each row represents an order, and each column represents a specific attribute of the order (e.g., Order ID, Customer ID, Product ID, Quantity). This table would be in 1NF if each cell contains only a single value and there are no repeating groups.
+Second Normal Form (2NF):
+
+Definition: A table is in 2NF if it is in 1NF and all non-key attributes are fully functionally dependent on the entire primary key.
+Requirements:
+It must be in 1NF.
+Every non-prime attribute (non-key column) must be fully functionally dependent on the entire primary key.
+Example: Suppose we have a table with columns Order ID, Product ID, Product Name, and Product Price. If Product Name and Product Price are fully dependent on Product ID (which is part of the composite primary key), then the table is in 2NF.
+Third Normal Form (3NF):
+Definition: A table is in 3NF if it is in 2NF and all non-key attributes are non-transitively dependent on the primary key.
+Requirements:
+It must be in 2NF.
+No non-prime attribute should be transitively dependent on the primary key.
+Example: Consider a table with columns Order ID, Customer ID, Customer Name, and Customer City. If Customer City is functionally dependent on Customer ID and not on Order ID, then the table is in 3NF.
+4.Share use case where you had to do denormalization in database..
+Answer: Use Case:
+In this scenario, let's say you frequently need to display a user's recent orders along with the details of each order, including the product information (name, price, etc.) for each item in the order. To retrieve this information efficiently, you would typically need to perform multiple table joins between the orders, order_items, and products tables.
+Denormalization Approach:
+To optimize the query performance for retrieving recent orders with product details, you could denormalize the database schema by introducing redundant data. For example, you could add additional columns to the orders table to store denormalized product information (such as product name, price, etc.) alongside each order.
+By denormalizing the schema in this way, you reduce the need for joins and simplify the query required to retrieve order details, thereby improving the query performance for this specific use case.
+Considerations:
+However, it's essential to consider the trade-offs of denormalization. While it can improve query performance for specific use cases, it may also lead to increased data redundancy, larger storage requirements, and more complex data maintenance. Additionally, denormalization can introduce potential update anomalies if the denormalized data is not synchronized correctly with the source data.
+
+5.What is primary key and foreign key?
+Primary Key:
+Definition: A primary key is a column or a set of columns in a table that uniquely identifies each row or record in the table. It ensures that each record in the table is unique and not null.
+Characteristics:
+Uniqueness: Each value in the primary key column(s) must be unique within the table.
+Non-nullability: The primary key column(s) cannot contain null values.
+Identification: The primary key uniquely identifies each record in the table.
+Purpose:
+Provides a unique identifier for each record in the table.
+Foreign Key:
+Definition: A foreign key is a column or a set of columns in a table that establishes a relationship with the primary key or a unique key in another table. It enforces referential integrity between related tables.
+Characteristics:
+References: A foreign key column(s) references the primary key or a unique key column(s) in another table.
+Ensures integrity: It ensures that values in the foreign key column(s) match values in the referenced primary key or unique key column(s).
+Constraints: A foreign key may allow null values unless specified otherwise, but if not null, the values must exist in the referenced table.
+Purpose:
+Defines relationships between tables to maintain data integrity and consistency.
+Enforces referential integrity, ensuring that values in the referencing table exist in the referenced table.
+6.what is alternate and candidate key?
+Candidate Key:
+Definition: A candidate key is a minimal set of attributes (columns) within a table that uniquely identifies each record (row) in that table. It means no subset of the candidate key can uniquely identify rows; only the entire set of attributes together forms a unique identifier.
+Characteristics:
+Uniqueness: Each combination of values in a candidate key must be unique within the table.
+Minimality: No subset of the candidate key can uniquely identify rows.
+Purpose: Candidate keys help in identifying potential primary keys for a table. From the set of candidate keys, one is chosen as the primary key, and the rest may be designated as alternate keys or remain as candidates if no primary key is chosen.
+Alternate Key:
+Definition: An alternate key is any candidate key that is not selected as the primary key for a table. It represents a unique identifier for rows that is not chosen as the primary means of identification.
+Characteristics:
+Uniqueness: Similar to the primary key, each combination of values in an alternate key must be unique within the table.
+Not Primary: An alternate key is not chosen as the primary means of identification for rows in the table.
+Purpose: Alternate keys provide additional unique identifiers for rows that can be used in place of the primary key if needed.
+7.What are window functions?
+Answer: Window functions, also known as windowing or analytic functions, are a powerful feature available in many relational database management systems (RDBMS) that allow for advanced data analysis and manipulation within a query. Window functions operate on a set of rows related to the current row, known as the "window," defined by the ordering and partitioning of the result set.
+Commonly used window functions include:
+ROW_NUMBER(): Assigns a unique sequential integer to each row in the window based on the specified ordering.
+RANK() and DENSE_RANK(): Assigns a rank to each row based on the specified ordering, with optional handling of ties.
+LAG() and LEAD(): Retrieve the value of a column from the previous or next row within the window, respectively.
+SUM(), AVG(), MIN(), MAX(): Calculate aggregate functions over a subset of rows defined by the window.
+
+8.Explain Ranking Functions? GIven a small table , write the output.
+Answer:  Ranking functions in SQL are used to assign a rank to each row in a result set based on a specified ordering. There are several ranking functions available in SQL, including ROW_NUMBER(), RANK(), DENSE_RANK(), and NTILE().
+
+9.Types of Joins? With example and usecase. All the number of records return and exact records.
+Answer: 
+Inner Join:
+SELECT * 
+FROM orders 
+INNER JOIN customers 
+ON orders.customer_id = customers.customer_id;
+Use Case: Retrieve a list of orders along with the corresponding customer information. Only orders with matching customer IDs will be included.
+Number of Records Returned: Matches between orders and customers.
+Left Join (Left Outer Join):
+SELECT * 
+FROM customers 
+LEFT JOIN orders 
+ON customers.customer_id = orders.customer_id;
+Use Case: Retrieve a list of customers along with any orders they have placed. All customers will be included, even if they haven't placed any orders.
+Number of Records Returned: All records from the left table (customers), matching records from the right table (orders), and NULL values for non-matching records.
+Right Join (Right Outer Join):
+Example:
+SELECT * 
+FROM orders 
+RIGHT JOIN customers 
+ON orders.customer_id = customers.customer_id;
+Use Case: Retrieve a list of orders along with the corresponding customer information. All orders will be included, even if there is no matching customer.
+Number of Records Returned: All records from the right table (customers), matching records from the left table (orders), and NULL values for non-matching records.
+Full Outer Join:
+SELECT * 
+FROM employees 
+FULL OUTER JOIN departments 
+ON employees.department_id = departments.department_id;
+Use Case: Retrieve a list of all employees and departments, including any unmatched records from either table.
+Number of Records Returned: All records from both tables, matching records where available, and NULL values for non-matching records.
+10.Use case when self join is required.
+Answer: 
+Consider a scenario where you have a table named employees that stores information about employees in a company. Each employee record contains a unique identifier (employee_id) and a reference to their manager's employee_id. You want to retrieve a list of employees along with the name of their manager.
+In this case, you would need to perform a self-join on the employees table to link each employee with their corresponding manager. Here's how you could do it:
+SELECT e.employee_id AS employee_id,
+  e.employee_name AS employee_name,
+  m.employee_name AS manager_name
+FROM employees e
+JOIN employees m ON e.manager_id = m.employee_id;
+
+11.What is subquery?
+Answer: A subquery, also known as a nested query or inner query, is a query nested within another SQL query. It allows you to use the result of one query as a part of another query. Subqueries can be used in various parts of a SQL statement, such as SELECT, FROM, WHERE, HAVING, and EXISTS clauses.
+12.What is corelated subquery?
+Answer: A correlated subquery is a type of subquery in SQL where the inner query depends on the outer query for its execution. In other words, the inner query references columns from the outer query, and its execution is dependent on the current row being processed by the outer query. This allows the subquery to be executed repeatedly, once for each row processed by the outer query.
+13.What is CTE? 
+Answer: CTE stands for Common Table Expression. It's a temporary named result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. CTEs are defined using the WITH keyword and can be thought of as similar to a derived table, but with some additional capabilities.
+Here's a breakdown of the key characteristics and usage of CTEs:
+Syntax:
+CTEs are defined using the following syntax:
+WITH cte_name (column1, column2, ...) AS (
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition)
+SELECT *
+FROM cte_name;
+14.What is derived table?
+Answer: A derived table, also known as an inline view or subquery factoring, is a temporary result set that is created dynamically within the scope of a SQL query. It's similar to a Common Table Expression (CTE) but is defined within the FROM clause of the main query rather than using the WITH keyword.
+15.Find third highest employee based on salary?
+Answer: To find the third highest employee based on salary, you can use the DENSE_RANK() window function in SQL. 
+16.Find third highest employee based on salary  per department?
+Answer We create a CTE named ranked_employees to calculate the dense rank of each employee's salary within their department. The PARTITION BY clause ensures that the ranking is done separately for each department.
+The DENSE_RANK() function assigns a unique rank to each employee's salary within their department, ordering them in descending order of salary.
+17.How to find duplicate values in a single column?
+Answer: The GROUP BY clause groups the rows of the table by the values in the specified column.
+The COUNT(*) function counts the number of occurrences of each value within the grouped rows.
+The HAVING clause filters the groups to include only those with a count greater than 1, indicating duplicate values.
+18.How to find duplicate values in a multiple column?
+Answer: To find duplicate values across multiple columns, you can combine the values of those columns into a single expression and then follow a similar approach as finding duplicates in a single column.
+19.What are ACID properties? give example for each property
+Answer: ACID (Atomicity, Consistency, Isolation, Durability) properties are the key principles that ensure reliability and consistency in database transactions. Here's a brief explanation of each property along with an example:
+Atomicity:
+Atomicity ensures that a transaction is treated as a single, indivisible unit of work, and either all of its operations are performed successfully, or none of them are performed at all.
+Example: Consider a bank transfer transaction where money is withdrawn from one account and deposited into another. Atomicity ensures that if the withdrawal operation succeeds, the corresponding deposit operation also succeeds. If either operation fails, the entire transaction is rolled back, ensuring that the balances of both accounts remain consistent.
+Consistency:
+Consistency ensures that the database remains in a consistent state before and after the transaction, with all integrity constraints and rules being enforced.
+Example: In a database containing student records, if a transaction involves updating a student's grade for a course, consistency ensures that the updated grade satisfies all constraints (such as being within a valid grade range) and does not violate any rules defined for the database.
+Isolation:
+Isolation ensures that the execution of concurrent transactions does not interfere with each other, and each transaction appears to be executed in isolation without being affected by the concurrent transactions.
+Example: Consider two transactions simultaneously updating the same bank account balance. Isolation ensures that each transaction sees the bank account balance before any modifications made by other transactions, preventing issues such as lost updates or dirty reads.
+Durability:
+Durability ensures that once a transaction is committed, the changes made by the transaction are permanently saved and will not be lost, even in the event of a system failure.
+Example: After a successful bank transfer transaction, the updated balances of the involved accounts are permanently saved to disk. Even if the system crashes after the transaction is committed, the changes made by the transaction (i.e., the updated balances) remain intact and can be recovered upon system restart.
+20.Diff between union and union all
+Answer: 
+UNION is used to combine the results of two or more SELECT statements into a single result set.Duplicate rows are removed from the final result set.The column names and data types of the result set are determined by the first SELECT statement.
+
+UNION ALL is also used to combine the results of two or more SELECT statements into a single result set.
+Duplicate rows are retained in the final result set.
+The result set includes all rows from each SELECT statement, without removing duplicates.
+21.Diff between primary key and unique key
+Answer A primary key uniquely identifies each record in a table and ensures that there are no duplicate values in that column.
+There can be only one primary key defined per table.
+A primary key column cannot contain NULL values.
+A unique key constraint ensures that all values in a column or a group of columns are unique, similar to a primary key.
+Unlike a primary key, multiple unique key constraints can be defined in a table.
+A unique key column can contain NULL values, but if it does, only one NULL value is allowed.
+22.Diff between truncate and delete
+Answer: TRUNCATE is a DDL (Data Definition Language) command.
+It removes all rows from a table.
+It is faster than DELETE as it does not log individual row deletions and does not maintain transaction log entries for each deleted row.
+DELETE is a DML (Data Manipulation Language) command.
+It removes specific rows from a table based on the conditions specified in the WHERE clause.
+It is slower than TRUNCATE as it logs individual row deletions and maintains transaction log entries for each deleted row, making it suitable for smaller-scale data removal operations.
+23.Diff between having and where
+Answer: The main difference between HAVING and WHERE lies in the stage at which they filter rows in a SQL query:
+The WHERE clause is used to filter rows before any grouping or aggregation is performed.
+It is applied to individual rows before they are grouped or aggregated.
+The HAVING clause is used to filter rows after grouping and aggregation have been performed.
+It is applied to groups of rows after they have been grouped using the GROUP BY clause and after any aggregate functions have been applied.
+24.SQL query execution order.
+Answer :Execution Order:
+FROM clause: Tables involved in the query are accessed, and any necessary joins are performed.
+WHERE clause: Rows that meet the conditions specified in the WHERE clause are filtered.
+GROUP BY clause: Rows are grouped into sets based on the specified grouping columns.
+HAVING clause: Groups that meet the conditions specified in the HAVING clause are filtered.
+SELECT clause: Columns and expressions specified in the SELECT clause are evaluated.
+ORDER BY clause: The resulting rows are sorted based on the specified column(s).
+LIMIT/OFFSET clause (if applicable): If a limit or offset is specified, a subset of the sorted rows is returned.
+25.What are indexes? Types of Indexes and their differences.
+Answer Clustered Index:
+A clustered index defines the physical order of the rows in a table based on the indexed column(s).
+It determines the order in which data is stored on disk, and there can be only one clustered index per table.
+Example: In SQL Server, the primary key constraint creates a clustered index by default.
+Non-Clustered Index:
+A non-clustered index stores the index key values and pointers to the corresponding rows in a separate structure from the actual data.
+It does not affect the physical order of the rows in the table.
+Example: CREATE INDEX index_name ON table_name (column_name);
+26.What is surrogate key? Give example where you used it and how.
+Answer: A surrogate key is a unique identifier assigned to each record in a database table to uniquely identify it. Unlike natural keys, which are based on the attributes of the data (such as names, dates, or other business-related data), surrogate keys are typically system-generated and have no inherent meaning to the data they represent. Surrogate keys are commonly used in database design to simplify data management, improve performance, and maintain data integrity.
