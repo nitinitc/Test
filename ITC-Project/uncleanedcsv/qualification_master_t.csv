@@ -1,0 +1,13 @@
+qualification_id,qualification_name
+1,Illiterate
+2,Literate (Without Education Level)
+3,Below Primary
+4,Primary
+5,Middle/Lower Secondary
+6,Matriculation/Junior School Certificate/Secondary
+7,Higher Secondary/Intermediate/Pre-University/Senior Secondary
+8,Non-Technical Diploma/Certificate not equal to Degree
+9,Graduate
+10,Post Graduate
+11,Doctorate
+12,ITI
