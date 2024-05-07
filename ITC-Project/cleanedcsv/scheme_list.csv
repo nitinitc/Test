@@ -1,0 +1,13 @@
+id,scheme_name,department_id,applying_scheme_point,benefits_from_the_scheme,financial_benefit_scheme,pdf,word_file,status,startage,endage,caste_cat,gender
+"1","Rural Self-Employment Training Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"2","Deen Dayal Antyodaya Yojana - National Rural Livelihood Mission Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"3","Deen Dayal Upadhyay - Rural Skills Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"4","Pradhan Mantri Awas Yojana - Rural","17",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"1","Rural Self-Employment Training Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"2","Deen Dayal Antyodaya Yojana - National Rural Livelihood Mission Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"3","Deen Dayal Upadhyay - Rural Skills Scheme","21",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"4","Pradhan Mantri Awas Yojana - Rural","17",\N,\N,\N,\N,\N,"1","18","100","GEN,BC,SC",\N
+"7","Term Loan","2",\N,\N,\N,\N,\N,"0","18","100","SC",\N
+"8","Cleanliness Enterprise Scheme","2",\N,\N,\N,\N,\N,"0","18","100","SC",\N
+"7","Term Loan","2",\N,\N,\N,\N,\N,"0","18","100","SC",\N
+"8","Cleanliness Enterprise Scheme","2",\N,\N,\N,\N,\N,"0","18","100","SC",\N
